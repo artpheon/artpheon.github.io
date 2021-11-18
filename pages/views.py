@@ -7,9 +7,6 @@ def home(request):
     team['team'] = TeamMember.objects.all()
     return render(request, 'pages/home.html', team)
 
-def cars(request):
-    return render(request, 'pages/cars.html')
-
 def about(request):
     team = dict()
     team['team'] = TeamMember.objects.all()
