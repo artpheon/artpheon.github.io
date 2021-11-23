@@ -175,7 +175,7 @@
                         </div>
                         <div class="detail">
                             <h1 class="title">
-                                <a href="car-details.html">{{ car.title }}</a>
+                                <a href="{% url 'car_detailed' car.id %}">{{ car.title }}</a>
                             </h1>
                             <div class="location">
                                 <a href="car-details.html">
