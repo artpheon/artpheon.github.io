@@ -8,6 +8,8 @@ def cars(request):
 
 def car_detailed(request, id):
     car = get_object_or_404(models.Car, pk=id)
+    if car.num_owners == "0":
+        car.num_owners = "N/A"
     data = {
         'car': car,
     }
