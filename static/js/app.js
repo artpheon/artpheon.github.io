@@ -323,6 +323,7 @@ $(function () {
                 mobileFallbackImage: 'img/banner/banner-1.jpg'
             }
         );
+        $('select').prop('selectedIndex', 0);
     });
 
     // Multilevel menuus

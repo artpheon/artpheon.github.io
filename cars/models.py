@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from datetime import datetime
 from ckeditor.fields import RichTextField
 from multiselectfield import MultiSelectField
