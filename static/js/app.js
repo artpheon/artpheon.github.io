@@ -323,7 +323,6 @@ $(function () {
                 mobileFallbackImage: 'img/banner/banner-1.jpg'
             }
         );
-        $('select').prop('selectedIndex', 0);
     });
 
     // Multilevel menuus
@@ -480,3 +479,7 @@ $(function () {
         }
     }).trigger("resize");
 })(jQuery);
+
+setTimeout(function() {
+    $("#message").fadeOut('slow');
+}, 4000)
