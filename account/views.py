@@ -1,14 +1,26 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth.models import User
 
 # Create your views here.
 
 def login(request):
     if request.method == 'POST':
-        print("<Received POST request>")
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'You are logged in now.')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Wrong username or password, please try again.')
+            return redirect('login')
+
     elif request.method == 'GET':
         print('<Received GET request>')
+
     return render(request, 'account/login.html')
 
 def register(request):
@@ -22,15 +34,19 @@ def register(request):
         if password != confirm_password:
             messages.error(request, 'Entered passwords do not match')
             return redirect('register')
-        elif User.objects.filter(username=username).exists:
+        elif User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists')
             return redirect('register')
-        elif User.objects.filter(email=email).exists:
+        elif User.objects.filter(email=email).exists():
             messages.error(request, 'This email is already used')
             return redirect('register')
         else:
-            user = User.objects.create_user(firstname=firstname, lastname=lastname, username=username, email=email, password=password)
+            user = User.objects.create_user(first_name=firstname, last_name=lastname, username=username, email=email, password=password)
+            auth.login(request, user)
+            messages.success(request, 'You are loggedd in now.')
+            return redirect('dashboard')
             user.save()
+            messages.success(request, 'You are registered now.')
             return redirect('register')
 
 
