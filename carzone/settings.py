@@ -47,6 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'ckeditor',
+    # for logging in via 3rd-party services
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # services:
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +155,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
     # 50: 'critical',
 }
+
+SITE_ID = 1
