@@ -37,8 +37,8 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'cars.apps.CarsConfig',
-    'account.apps.AccountConfig',
     'pages.apps.PagesConfig',
+    'user_account.apps.UserAccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

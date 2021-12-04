@@ -21,7 +21,7 @@ def login(request):
     elif request.method == 'GET':
         print('<Received GET request>')
 
-    return render(request, 'account/login.html')
+    return render(request, 'user_account/login.html')
 
 def register(request):
     if request.method == 'POST':
@@ -45,17 +45,10 @@ def register(request):
             auth.login(request, user)
             messages.success(request, 'You are loggedd in now.')
             return redirect('dashboard')
-            user.save()
-            messages.success(request, 'You are registered now.')
-            return redirect('register')
-
-
-        # print('got POST request')
-        # return redirect('register')
-    return render(request, 'account/register.html')
+    return render(request, 'user_account/register.html')
 
 def dashboard(request):
-    return render(request, 'account/dashboard.html')
+    return render(request, 'user_account/dashboard.html')
 
 def logout(request):
     if request.method == 'POST':
