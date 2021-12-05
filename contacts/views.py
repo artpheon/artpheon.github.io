@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from . import models
 
 # Create your views here.
@@ -35,6 +37,16 @@ def inquiry(request):
             email=email,
             phone_num=phone_num,
             message=message,
+        )
+        
+        admin = User.objects.get(is_superuser=True)
+
+        send_mail(
+            'New Car Inquiry',
+            'You have a new inquiry about the car: ' + car_title + ', with id: ' + car_id + '.\n',
+            'drow0440@gmail.com',
+            [ admin.email ],
+            fail_silently=False
         )
 
         contact.save()
