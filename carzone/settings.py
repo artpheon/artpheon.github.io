@@ -32,6 +32,8 @@ ALLOWED_HOSTS = [
     '192.168.1.75',
 ]
 
+LOGIN_REDIRECT_URL = 'dashboard'
+
 
 # Application definition
 

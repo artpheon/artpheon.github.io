@@ -13,14 +13,12 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are logged in now.')
+            print('<authenticated user {}/{}>'.format(username, password))
             return redirect('dashboard')
         else:
             messages.error(request, 'Wrong username or password, please try again.')
+            print("<wrong username/password>")
             return redirect('login')
-
-    elif request.method == 'GET':
-        print('<Received GET request>')
-
     return render(request, 'user_account/login.html')
 
 def register(request):
