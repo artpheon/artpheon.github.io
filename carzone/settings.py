@@ -27,10 +27,9 @@ SECRET_KEY = '1)%=y=l7xj%wq-vbd16r$3y0yw_2u%wd3ht!3cd@xu-pa51)s%'
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'https://obscure-plains-13992.herokuapp.com/',
+    '.herokuapp.com',
     'localhost',
-    '127.0.0.1',
-    '192.168.1.75',
-    'https://shrouded-citadel-59496.herokuapp.com',
 ]
 
 LOGIN_REDIRECT_URL = 'dashboard'
