@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from contacts.models import Contact
+from cars.models import Car
 
 # Create your views here.
 
@@ -43,8 +46,16 @@ def register(request):
             return redirect('dashboard')
     return render(request, 'user_account/register.html')
 
+@login_required(login_url='/user_account/login')
 def dashboard(request):
-    return render(request, 'user_account/dashboard.html')
+    inquiries = Contact.objects.order_by('-create_date').filter(user_id=request.user.id)
+    for inquiry in inquiries:
+        car = Car.objects.get(car_id=inquiry.car_id)
+        setattr(inquiry, 'car_price', car.price)
+    data = {
+        'inquiries': inquiries,
+    }
+    return render(request, 'user_account/dashboard.html', data)
 
 def logout(request):
     if request.method == 'POST':

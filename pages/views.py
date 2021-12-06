@@ -1,8 +1,10 @@
 from django.shortcuts import render
-
+from django.contrib import messages
+from django.contrib.auth.models import User
 from cars.views import search
 from .models import TeamMember
 from cars.models import Car
+from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
@@ -39,4 +41,20 @@ def services(request):
     return render(request, 'pages/services.html')
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        subject = request.POST['subject']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        text = request.POST['message']
+
+        admin = User.objects.get(is_superuser=True)
+        send_mail(
+            'Contact Request: ' + subject,
+            'You have a new inquiry from {}:\nEmail: {}\nPhone number: {}\n\n{}'.format(name, email, phone, text),
+            'drow0440@gmail.com',
+            [ admin.email ],
+            fail_silently=False
+        )
+        messages.success(request, "Your question has been sent!")
     return render(request, 'pages/contact.html')
