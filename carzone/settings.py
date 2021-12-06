@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '192.168.1.75',
+    'https://shrouded-citadel-59496.herokuapp.com',
 ]
 
 LOGIN_REDIRECT_URL = 'dashboard'
